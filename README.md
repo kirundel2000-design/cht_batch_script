@@ -1,0 +1,1 @@
+This script allows you to automatically interact with the Fensap ICE interface, open an CHT3D project, and run the solution. To ensure proper operation, change your Fensap version and project coordinates in your system in the definition.h file.
