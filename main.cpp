@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
 
 
     //ИСПРАВИТЬ ПОД СВОЮ ВЕРСИЮ FENSAP
-    HWND hwnd = FindWindow(NULL, L"FENSAP-ICE [2024 R2]");
+    HWND hwnd = FindWindow(NULL, FENS_VERSION);
     HWND ViewPort;
 
     ShowWindow(hwnd, SW_RESTORE);   // восстановить если свернуто
@@ -128,7 +128,7 @@ int main(int argc, char* argv[])
     findViewPort(hwnd); ViewPort = hwnd;
 
     //ВВЕСТИ СВОЮ КООРДИНАТЫ
-    doubleClickClientPoint(hwnd,55,165);
+    doubleClickClientPoint(hwnd,X_CORD_PROJ,Y_CORD_PROJ);
     if(updateInterface==1) Sleep(8000);
     else Sleep(2400);
 
