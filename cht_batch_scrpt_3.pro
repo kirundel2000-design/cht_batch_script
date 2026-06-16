@@ -14,12 +14,10 @@ SOURCES += \
 
 INCLUDEPATH += \
     "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\um" \
-    "C:\\LibrarysC\\krabsetw-master\\krabs"
 
 
 LIBS += \
     -L"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.22621.0\\um\\x64\\" -luiautomationcore \
-    -L"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.22621.0\\um\\x64\\" -lkernel32 \
     -L"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.22621.0\\um\\x64\\" -luser32 \
     -L"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.22621.0\\um\\x64\\" -lole32 \
     -L"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.22621.0\\um\\x64\\" -loleaut32 \

@@ -1,5 +1,3 @@
-#include <thread>
-#include <chrono>
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 #define NOMIMAX
@@ -7,8 +5,6 @@
 #include <windows.h>
 #include <uiautomation.h>
 #include <uiautomationclient.h>
-#include <uiautomationcore.h>
-#include <UIAutomationCoreApi.h>
 #include <tlHelp32.h>
 #include <oleacc.h>
 #include <QVector>
@@ -34,33 +30,6 @@ void btnClick(HWND hwnd,IUIAutomation* automation = NULL){
     PostMessage(hwnd, WM_LBUTTONDOWN, MK_LBUTTON, 0);
     Sleep(10);
     PostMessage(hwnd, WM_LBUTTONUP, 0, 0);
-
-    //неработающий кусок кода, эмуляция нажатая показала себя лучше
-    // IUIAutomationElement* root = nullptr;
-    // automation->ElementFromHandle(hwnd, &root);
-
-    // VARIANT var;
-    // var.vt = VT_BSTR;
-    // var.bstrVal = SysAllocString(L"unnamed");
-    // IUIAutomationCondition* cond = nullptr;
-    // automation->CreatePropertyCondition(UIA_NamePropertyId, var, &cond);
-    // IUIAutomationElement* startBtn = nullptr;
-    // root->FindFirst(TreeScope_Subtree, cond, &startBtn);
-
-    // if (startBtn)
-    // {
-    //     IUIAutomationInvokePattern* invoke = nullptr;
-
-    //     startBtn->GetCurrentPattern(UIA_InvokePatternId, (IUnknown**)&invoke);
-
-    //     if (invoke)
-    //     {
-    //         invoke->Invoke();
-    //         invoke->Release();
-    //     }
-
-    //     startBtn->Release();
-    // }
 }
 
 int PrintRole(HWND hwnd)
@@ -142,14 +111,10 @@ void PressKey(WORD vk){
 void ClickClientPoint(HWND hwnd, int clientX, int clientY)
 {
     POINT pt{clientX, clientY};
-    //ClientToScreen(hwnd, &pt);
 
     ShowWindow(hwnd, SW_RESTORE);
     SetForegroundWindow(hwnd);
     SetCursorPos(pt.x, pt.y);
-
-    // qDebug() << "x: "<<pt.x<<"  y: "<<pt.y;
-    // qDebug() << WindowFromPoint(pt);
 
     Sleep(20);
     mouseLeftClick();
@@ -159,7 +124,6 @@ void ClickClientPoint(HWND hwnd, int clientX, int clientY)
 void doubleClickClientPoint(HWND hwnd, int clientX, int clientY)
 {
     POINT pt{clientX, clientY};
-    //ClientToScreen(hwnd, &pt);
 
     SetForegroundWindow(hwnd);
     SetCursorPos(pt.x, pt.y);
@@ -204,22 +168,6 @@ void findRunFrame(HWND& hwnd) {
     child = GetWindow(child, GW_HWNDNEXT); //почему то поломалось, возникает hwnd и не считывается inspector
     child = GetWindow(child, GW_CHILD);
 
-    // int in_size = 2;
-    // for(int i=0;i<2;i++){
-    //     int size = getNumOfChilds(child);
-    //     HWND sec_child;
-    //     for(int j=0;j<size;j++){
-    //         if(j==0) {sec_child = GetWindow(child, GW_CHILD);}
-    //         else {sec_child = GetWindow(child, GW_HWNDNEXT);}
-    //         wchar_t windowText[256] = L"";
-    //         GetWindowTextW(sec_child, windowText, 256);
-    //         QString name = QString::fromWCharArray(windowText);
-    //         cutWindowName(name);
-    //         if(name=="unnamed" && (GetWindow(sec_child, GW_CHILD)!=NULL)){
-    //             child = sec_child;
-    //             break;}
-    //     }
-    // }
     child = GetWindow(child, GW_HWNDNEXT);
     hwnd = child;
 }
@@ -270,7 +218,6 @@ bool findingStartStopSetTab(HWND& hwnd){
         QString name = QString::fromWCharArray(className);
         cutWindowName(name);
         if(name!="aBtnStartStop_SettingsTab") find=findingStartStopSetTab(child);
-        //if(name!="aBtnStartStop_GraphTab") find=findingStartStopSetTab(child);
         else {find=true;}
 
         if(find) {hwnd=child; break;}
@@ -359,7 +306,6 @@ bool findingIceBcBtn(HWND& hwnd){
         QString name = QString::fromWCharArray(className);
         cutWindowName(name);
         if(name!="aAutoFileButton_ICE_FLUXBC") find=findingIceBcBtn(child);
-        //if(name!="aBtnStartStop_GraphTab") find=findingStartStopSetTab(child);
         else {find=true;}
 
         if(find) {hwnd=child; break;}
@@ -405,7 +351,6 @@ bool findingBcListView(HWND& hwnd){
         QString name = QString::fromWCharArray(className);
         cutWindowName(name);
         if(name!="aBCListView") find=findingBcListView(child);
-        //if(name!="aBtnStartStop_GraphTab") find=findingStartStopSetTab(child);
         else {find=true;}
 
         if(find) {hwnd=child; break;}
